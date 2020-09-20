@@ -30,6 +30,10 @@
   border-radius: 9px 0px 0px 9px;
 }
 
+.caseBox{
+  text-align: center;
+}
+
 .App-Header {
   /* background-color: #282c34;
   min-height: 100vh;
