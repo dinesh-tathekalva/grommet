@@ -32,6 +32,9 @@ class App extends Component {
       .then(res => {
         const AllCountries = res.data.Countries;
         const Country = AllCountries.map((countries) => countries.Slug)
+        for(var i = 0 ; i < Country.length ; i++){
+          Country[i] = Country[i].charAt(0).toUpperCase()+ Country[i].substr(1);;
+        } 
         this.setState({ 
           // TotalCountryConfirmed: TotalCountry.TotalConfirmed,
           // TotalCountryDeaths: TotalCountry.TotalDeaths,
@@ -43,7 +46,9 @@ class App extends Component {
 
      
 
-      
+    //   for(var i = 1 ; i < newArr.length ; i++){
+    //     newArr[i] = newArr[i].charAt(0).toUpperCase();
+    // }
 
   }
 

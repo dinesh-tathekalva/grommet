@@ -12,8 +12,8 @@ export default class Containers extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: [props.Country[0]],
-            options: [...props.Country],
+            selected: 'india',
+            options: '',
             Confirmed: '',
             Deaths: '',
             Recovered: '',
@@ -22,13 +22,11 @@ export default class Containers extends Component {
 
     changeHandler = e => {
         this.setState({
-            value: e.value
+            selected: e.value
         })
-    }
+        console.log(e.value);
 
-    componentDidUpdate() {
-        console.log(this.state.value);
-        axios.get(`https://api.covid19api.com/total/country/${this.state.value}`)
+        axios.get(`https://api.covid19api.com/total/country/${e.value}`)
             .then(res => {
                 const AllData = res.data;
                 // const Country = AllCountries.map(countries => countries.Slug)
@@ -40,16 +38,53 @@ export default class Containers extends Component {
                 });
                 // console.log(AllData[AllData.length-1].Country);
                 // console.log(AllData[AllData.length - 1]);
-                // console.log(this.state);
+                // console.log(AllData);
 
             })
     }
+
+    componentDidMount(){
+        axios.get(`https://api.covid19api.com/total/country/${this.state.selected}`)
+            .then(res => {
+                const indiaData = res.data;
+                // const Country = AllCountries.map(countries => countries.Slug)
+                this.setState({
+                    Confirmed: indiaData[indiaData.length - 1].Confirmed,
+                    Deaths: indiaData[indiaData.length - 1].Deaths,
+                    Recovered: indiaData[indiaData.length - 1].Recovered,
+                    // Country: Country
+                });
+                // console.log(AllData[AllData.length-1].Country);
+                // console.log(AllData[AllData.length - 1]);
+                // console.log(indiaData);
+
+            })
+    }
+
+    // componentDidUpdate() {
+    //     console.log(this.state.value);
+    //     // axios.get(`https://api.covid19api.com/total/country/${this.state.value}`)
+    //     //     .then(res => {
+    //     //         const AllData = res.data;
+    //     //         // const Country = AllCountries.map(countries => countries.Slug)
+    //     //         this.setState({
+    //     //             Confirmed: AllData[AllData.length - 1].Confirmed,
+    //     //             Deaths: AllData[AllData.length - 1].Deaths,
+    //     //             Recovered: AllData[AllData.length - 1].Recovered,
+    //     //             // Country: Country
+    //     //         });
+    //     //         // console.log(AllData[AllData.length-1].Country);
+    //     //         // console.log(AllData[AllData.length - 1]);
+    //     //         // console.log(AllData);
+
+    //     //     })
+    // }
 
 
 
     render() {
         const { Country, TotalConfirmed, TotalDeaths, TotalRecovered, ActiveCases } = this.props
-        const { options, value, Confirmed, Deaths, Recovered } = this.state;
+        const {  Confirmed, Deaths, Recovered } = this.state;
         const Active = this.state.Confirmed - (this.state.Recovered + this.state.Deaths)
 
 
@@ -150,15 +185,13 @@ export default class Containers extends Component {
                                     <CardBody pad="medium">
 
                                         <Select
-                                            // multiple={true}
-                                            value={value}
-                                            onSearch={(searchText) => {
-                                                const regexp = new RegExp(searchText, 'i');
-                                                this.setState({ options: Country.filter(o => o.match(regexp)) });
-                                            }}
+                                            options={[...Country]}
+                                            value={this.state.selected}
+                                            // onSearch={(searchText) => {
+                                            //     const regexp = new RegExp(searchText, 'i');
+                                            //     this.setState({ options: Country.filter(o => o.match(regexp)) });
+                                            // }}
                                             onChange={this.changeHandler.bind(this)}
-
-                                            options={options}
                                         />
 
                                         <Box direction="row" className='caseBox'>
@@ -170,7 +203,7 @@ export default class Containers extends Component {
 
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
-                                        {this.state.value}
+                                        {this.state.selected}
         </CardFooter>
                                 </Card>
                             </Box>
