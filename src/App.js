@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Containters from './components/Containers'
 import axios from 'axios';
+import 'react-unique-key';
 
 class App extends Component {
 
@@ -11,9 +12,6 @@ class App extends Component {
       TotalConfirmed: '',
       TotalDeaths: '',
       TotalRecovered: '',
-      TotalCountryConfirmed: '',
-      TotalCountryDeaths: '',
-      TotalCountryRecovered: '',
       Country:''
     }
   }
@@ -33,7 +31,7 @@ class App extends Component {
       axios.get(`https://api.covid19api.com/summary`)
       .then(res => {
         const AllCountries = res.data.Countries;
-        const Country = AllCountries.map(countries => countries.Slug)
+        const Country = AllCountries.map((countries) => countries.Slug)
         this.setState({ 
           // TotalCountryConfirmed: TotalCountry.TotalConfirmed,
           // TotalCountryDeaths: TotalCountry.TotalDeaths,
@@ -43,6 +41,9 @@ class App extends Component {
         // console.log(Country);
       })
 
+     
+
+      
 
   }
 
