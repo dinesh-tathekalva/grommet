@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Select, WorldMap, Avatar, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
+import { Select, WorldMap, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
 import { Codepen, Github, Linkedin } from 'grommet-icons';
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 import axios from 'axios';
 
 // import Me from '../Me.jpg'
@@ -12,8 +12,8 @@ export default class Containers extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: '',
-            options: '',
+            value: [props.Country[0]],
+            options: [...props.Country],
             Confirmed: '',
             Deaths: '',
             Recovered: '',
@@ -112,7 +112,7 @@ export default class Containers extends Component {
                                             <Text>Total Confirmed <Text>{TotalConfirmed}</Text></Text>
                                             <Text color='status-critical'>Total Deaths <Text>{TotalDeaths}</Text></Text>
                                             <Text color='status-ok'>Total Recovered <Text>{TotalRecovered}</Text></Text>
-                                            <Text color='status-warning'>Active Cases <Text>{Active}</Text></Text>
+                                            <Text color='status-warning'>Active Cases <Text>{ActiveCases}</Text></Text>
                                         </Box>
 
 
@@ -158,7 +158,7 @@ export default class Containers extends Component {
                                             }}
                                             onChange={this.changeHandler.bind(this)}
 
-                                            options={[...Country]}
+                                            options={options}
                                         />
 
                                         <Box direction="row" className='caseBox'>
