@@ -12,8 +12,8 @@ export default class Containers extends Component {
             Confirmed: '',
             Deaths: '',
             Recovered: '',
-            Lat: '',
-            Lon: ''
+            Lat: '20.59',
+            Lon: '78.96'
         }
     }
 
@@ -128,6 +128,7 @@ export default class Containers extends Component {
                                         />
 
                                         <WorldMap
+                                        className='map'
                                             fill='horizontal'
                                             extend={(props) => { }}
                                             color="dark-6"
