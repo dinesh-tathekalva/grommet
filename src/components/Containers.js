@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Select, WorldMap, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
+import { Select, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
 import { Codepen, Github, Linkedin } from 'grommet-icons';
 // import { render } from '@testing-library/react';
 import axios from 'axios';
@@ -12,7 +12,7 @@ export default class Containers extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: 'india',
+            selected: 'India',
             options: '',
             Confirmed: '',
             Deaths: '',
@@ -86,7 +86,7 @@ export default class Containers extends Component {
         const { Country, TotalConfirmed, TotalDeaths, TotalRecovered, ActiveCases } = this.props
         const {  Confirmed, Deaths, Recovered } = this.state;
         const Active = this.state.Confirmed - (this.state.Recovered + this.state.Deaths)
-
+        const Cases = ' cases'
 
         return (
             <Grommet className='app'>
@@ -141,17 +141,17 @@ export default class Containers extends Component {
                                 pad="medium"
                             >
                                 <Card margin='small' align='center' height="medium" width="medium" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" ></CardHeader>
+                                    <CardHeader fill='horizontal' pad="medium" >World Overview</CardHeader>
                                     <CardBody pad="small">
-                                        <Box direction="row" className='caseBox'>
-                                            <Text>Total Confirmed <Text>{TotalConfirmed}</Text></Text>
-                                            <Text color='status-critical'>Total Deaths <Text>{TotalDeaths}</Text></Text>
-                                            <Text color='status-ok'>Total Recovered <Text>{TotalRecovered}</Text></Text>
-                                            <Text color='status-warning'>Active Cases <Text>{ActiveCases}</Text></Text>
+                                        <Box className='caseBox' >
+                                            <Text> Confirmed <Text>{TotalConfirmed}</Text></Text>
+                                            <Text color='status-critical'> Deaths <Text>{TotalDeaths}</Text></Text>
+                                            <Text color='status-ok'> Recovered <Text>{TotalRecovered}</Text></Text>
+                                            <Text color='status-warning'> Cases <Text>{ActiveCases}</Text></Text>
                                         </Box>
 
 
-                                        <WorldMap
+                                        {/* <WorldMap
                                             pad="large"
                                             extend={(props) => { }}
                                             color="dark-6"
@@ -173,15 +173,15 @@ export default class Containers extends Component {
                                                 },
                                             ]}
                                             selectColor="accent-2"
-                                        />
+                                        /> */}
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
-                                        World Total Cases
+                                        World cases
                                     </CardFooter>
                                 </Card>
 
                                 <Card margin='small' align='center' height="medium" width="medium" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" >Country</CardHeader>
+                                    <CardHeader fill='horizontal' pad="medium" >Country Overview</CardHeader>
                                     <CardBody pad="medium">
 
                                         <Select
@@ -194,7 +194,7 @@ export default class Containers extends Component {
                                             onChange={this.changeHandler.bind(this)}
                                         />
 
-                                        <Box direction="row" className='caseBox'>
+                                        <Box className='caseBox'>
                                             <Text> Confirmed <Text>{Confirmed}</Text></Text>
                                             <Text color='status-critical'> Deaths <Text>{Deaths}</Text></Text>
                                             <Text color='status-ok'> Recovered <Text>{Recovered}</Text></Text>
@@ -203,7 +203,7 @@ export default class Containers extends Component {
 
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
-                                        {this.state.selected}
+                                        {this.state.selected +  Cases} 
         </CardFooter>
                                 </Card>
                             </Box>
