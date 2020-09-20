@@ -102,10 +102,10 @@ export default class Containers extends Component {
                     {size => (
                         <Main flex='grow' overflow='auto' fill='horizontal' >
                             <Box
-                                direction="row"
+                                // direction="row"
                                 pad="medium"
                             >
-                                <Card margin='small' align='center' height="large" width="large" background="light-1">
+                                <Card margin='small' align='center' height="medium" width="medium" background="light-1">
                                     <CardHeader fill='horizontal' pad="medium" ></CardHeader>
                                     <CardBody pad="small">
                                         <Box direction="row" className='caseBox'>
@@ -146,7 +146,7 @@ export default class Containers extends Component {
                                 </Card>
 
                                 <Card margin='small' align='center' height="medium" width="medium" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" >Location</CardHeader>
+                                    <CardHeader fill='horizontal' pad="medium" >Country</CardHeader>
                                     <CardBody pad="medium">
 
                                         <Select
@@ -170,7 +170,7 @@ export default class Containers extends Component {
 
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
-                                        Bay Area, CA
+                                        {this.state.value}
         </CardFooter>
                                 </Card>
                             </Box>
