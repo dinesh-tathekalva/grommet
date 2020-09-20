@@ -1,19 +1,58 @@
 import React, { Component } from 'react'
-import { Select, WorldMap, Avatar, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
+import { Select, WorldMap, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
 import { Codepen, Github, Linkedin } from 'grommet-icons';
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
+import axios from 'axios';
+
 // import Me from '../Me.jpg'
 
 
+
 export default class Containers extends Component {
-    //  console.log(Country.length);
-    // const CountryList = [...Country];
-    // console.log(CountryList);
-    state = { value: [] }
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: [props.Country[0]],
+            options: [...props.Country],
+            Confirmed: '',
+            Deaths: '',
+            Recovered: '',
+        }
+    }
+
+    changeHandler = e => {
+        this.setState({
+            value: e.value
+        })
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.value);
+        axios.get(`https://api.covid19api.com/total/country/${this.state.value}`)
+            .then(res => {
+                const AllData = res.data;
+                // const Country = AllCountries.map(countries => countries.Slug)
+                this.setState({
+                    Confirmed: AllData[AllData.length - 1].Confirmed,
+                    Deaths: AllData[AllData.length - 1].Deaths,
+                    Recovered: AllData[AllData.length - 1].Recovered,
+                    // Country: Country
+                });
+                // console.log(AllData[AllData.length-1].Country);
+                // console.log(AllData[AllData.length - 1]);
+                // console.log(this.state);
+
+            })
+    }
+
+
 
     render() {
         const { Country, TotalConfirmed, TotalDeaths, TotalRecovered, ActiveCases } = this.props
-        const { options, value } = this.state;
+        const { options, value, Confirmed, Deaths, Recovered } = this.state;
+        const Active = this.state.Confirmed - (this.state.Recovered + this.state.Deaths)
+
+
         return (
             <Grommet className='app'>
                 <ResponsiveContext.Consumer>
@@ -67,7 +106,7 @@ export default class Containers extends Component {
                                 pad="medium"
                             >
                                 <Card margin='small' align='center' height="large" width="large" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" >Location</CardHeader>
+                                    <CardHeader fill='horizontal' pad="medium" ></CardHeader>
                                     <CardBody pad="small">
                                         <Box direction="row" className='caseBox'>
                                             <Text>Total Confirmed <Text>{TotalConfirmed}</Text></Text>
@@ -110,20 +149,29 @@ export default class Containers extends Component {
                                     <CardHeader fill='horizontal' pad="medium" >Location</CardHeader>
                                     <CardBody pad="medium">
 
-
-
                                         <Select
+                                            // multiple={true}
                                             value={value}
-                                            onChange={event => this.setState({
-                                                value: event.value,
-                                            })}
-                                            options={[...Country]}
+                                            onSearch={(searchText) => {
+                                                const regexp = new RegExp(searchText, 'i');
+                                                this.setState({ options: Country.filter(o => o.match(regexp)) });
+                                            }}
+                                            onChange={this.changeHandler.bind(this)}
+
+                                            options={options}
                                         />
+
+                                        <Box direction="row" className='caseBox'>
+                                            <Text> Confirmed <Text>{Confirmed}</Text></Text>
+                                            <Text color='status-critical'> Deaths <Text>{Deaths}</Text></Text>
+                                            <Text color='status-ok'> Recovered <Text>{Recovered}</Text></Text>
+                                            <Text color='status-warning'> Active     <Text>{Active}</Text></Text>
+                                        </Box>
 
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
                                         Bay Area, CA
-                                    </CardFooter>
+        </CardFooter>
                                 </Card>
                             </Box>
                         </Main>
