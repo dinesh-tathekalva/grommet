@@ -11,7 +11,10 @@ class App extends Component {
       TotalConfirmed: '',
       TotalDeaths: '',
       TotalRecovered: '',
-      
+      TotalCountryConfirmed: '',
+      TotalCountryDeaths: '',
+      TotalCountryRecovered: '',
+      Country:''
     }
   }
 
@@ -26,6 +29,21 @@ class App extends Component {
         });
         // console.log(this.state.TotalConfirmed);
       })
+
+      axios.get(`https://api.covid19api.com/summary`)
+      .then(res => {
+        const AllCountries = res.data.Countries;
+        const Country = AllCountries.map(countries => countries.Slug)
+        this.setState({ 
+          // TotalCountryConfirmed: TotalCountry.TotalConfirmed,
+          // TotalCountryDeaths: TotalCountry.TotalDeaths,
+          // TotalCountryRecovered: TotalCountry.TotalRecovered,
+          Country: Country
+        });
+        // console.log(Country);
+      })
+
+
   }
 
   render(){
@@ -36,7 +54,8 @@ class App extends Component {
         <Containters ActiveCases={ActiveCases} 
         TotalConfirmed={this.state.TotalConfirmed} 
         TotalDeaths={this.state.TotalDeaths} 
-        TotalRecovered={this.state.TotalRecovered}/>
+        TotalRecovered={this.state.TotalRecovered}
+        Country={this.state.Country}/>
       </div>
     );
   }
