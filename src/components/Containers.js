@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Select, WorldMap, ResponsiveContext, Clock, Box, Nav, Main, Footer, Text, Anchor, Header, Grommet, CardHeader, Card, CardFooter, CardBody } from 'grommet';
-import { Codepen, Github, Linkedin } from 'grommet-icons';
+import { Github, Globe, Local } from 'grommet-icons';
 import axios from 'axios';
 
 export default class Containers extends Component {
@@ -65,9 +65,9 @@ export default class Containers extends Component {
                     {size => (
                         <Header className='header' background="brand">
                             <Nav className='nav' direction="row" background="brand" pad="medium">
-                                <Anchor icon={<Github />} hoverIndicator />
-                                <Anchor icon={<Codepen />} hoverIndicator />
-                                <Anchor icon={<Linkedin />} hoverIndicator />
+                                <Anchor href="https://github.com/dinesh-tathekalva" target="_blank" icon={<Github />} hoverIndicator />
+                                <Anchor href="https://bit.ly/3iPS6GP" target="_blank" icon={<Globe />} hoverIndicator />
+                                <Anchor href="https://bit.ly/3hK2myN" target="_blank" icon={<Local />} hoverIndicator />
                             </Nav>
                             <Clock margin='medium' type="digital" />
                         </Header>
