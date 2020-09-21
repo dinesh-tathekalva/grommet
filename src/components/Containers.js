@@ -120,10 +120,6 @@ export default class Containers extends Component {
                                         <Select
                                             options={[...Country]}
                                             value={this.state.selected}
-                                            onSearch={(searchText) => {
-                                                const regexp = new RegExp(searchText, 'i');
-                                                this.setState({ options: Country.filter(o => o.match(regexp)) });
-                                            }}
                                             onChange={this.changeHandler.bind(this)}
                                         />
 
@@ -132,15 +128,6 @@ export default class Containers extends Component {
                                             fill='horizontal'
                                             extend={(props) => { }}
                                             color="dark-6"
-                                            // continents={[
-                                            //     {
-                                            //         name: 'North America',
-                                            //         //   color: 'neutral-2',
-                                            //         color: "dark-6",
-                                            //         onClick: (name) => { },
-                                            //     },
-                                            // ]}
-                                            // onSelectPlace={(Lat, Lon) => { }}
                                             places={[
                                                 {
                                                     name: 'Bay Area',
