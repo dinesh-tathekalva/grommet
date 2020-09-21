@@ -122,7 +122,6 @@ export default class Containers extends Component {
                                             <Text color='status-ok'> Recovered <Text>{TotalRecovered}</Text></Text>
                                             <Text color='status-warning'> Cases <Text>{ActiveCases}</Text></Text>
                                         </Box>
-
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-6">
                                         World Cases
@@ -132,13 +131,12 @@ export default class Containers extends Component {
                                 <Card className='card' margin='small' align='center' height="large" width="medium" background="light-1">
                                     <CardHeader fill='horizontal' pad="medium" background="light-3">Country Overview</CardHeader>
                                     <CardBody pad="medium">
-
                                         <Select
+                                            
                                             options={[...Country]}
                                             value={this.state.selected}
                                             onChange={this.changeHandler.bind(this)}
                                         />
-
                                         <WorldMap
                                         className='map'
                                             fill='horizontal'
@@ -154,14 +152,12 @@ export default class Containers extends Component {
                                             ]}
                                             selectColor="accent-2"
                                         />
-
                                         <Box className='caseBox'>
                                             <Text> Confirmed <Text>{Confirmed}</Text></Text>
                                             <Text color='status-critical'> Deaths <Text>{Deaths}</Text></Text>
                                             <Text color='status-ok'> Recovered <Text>{Recovered}</Text></Text>
                                             <Text color='status-warning'> Active     <Text>{Active}</Text></Text>
                                         </Box>
-
                                     </CardBody>
                                     <CardFooter fill='horizontal' justify='center' pad='medium' background="light-6">
                                         {this.state.selected + Cases}
