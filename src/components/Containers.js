@@ -94,12 +94,28 @@ export default class Containers extends Component {
                     {size => (
                         <Main flex='grow' overflow='auto' fill='horizontal' >
                             <Box
-                                // direction="row"
+                                align='center'
                                 pad="medium"
                             >
-                                <Card margin='small' align='center' height="medium" width="medium" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" >World Overview</CardHeader>
-                                    <CardBody pad="small">
+                                <Card className='card' margin='small' align='center' height="large" width="medium" background="light-1">
+                                    <CardHeader fill='horizontal' pad="medium" background="light-3">World Overview</CardHeader>
+                                    <CardBody pad="medium">
+                                    <WorldMap
+                                            className='map'
+                                            fill='horizontal'
+                                            extend={(props) => { }}
+                                            color="status-warning"
+                                            places={[
+                                                {   
+                                                    strokeWidth:"50",
+                                                    name: 'Bay Area',
+                                                    location: [],
+                                                    color: 'status-critical',
+                                                    onClick: (name) => { },
+                                                },
+                                            ]}
+                                            selectColor="accent-2"
+                                        />
                                         <Box className='caseBox' >
                                             <Text> Confirmed <Text>{TotalConfirmed}</Text></Text>
                                             <Text color='status-critical'> Deaths <Text>{TotalDeaths}</Text></Text>
@@ -108,13 +124,13 @@ export default class Containers extends Component {
                                         </Box>
 
                                     </CardBody>
-                                    <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
-                                        World cases
+                                    <CardFooter fill='horizontal' justify='center' pad='medium' background="light-6">
+                                        World Cases
                                     </CardFooter>
                                 </Card>
-
-                                <Card margin='small' align='center' height="large" width="medium" background="light-1">
-                                    <CardHeader fill='horizontal' pad="medium" >Country Overview</CardHeader>
+                                        
+                                <Card className='card' margin='small' align='center' height="large" width="medium" background="light-1">
+                                    <CardHeader fill='horizontal' pad="medium" background="light-3">Country Overview</CardHeader>
                                     <CardBody pad="medium">
 
                                         <Select
@@ -147,7 +163,7 @@ export default class Containers extends Component {
                                         </Box>
 
                                     </CardBody>
-                                    <CardFooter fill='horizontal' justify='center' pad='medium' background="light-3">
+                                    <CardFooter fill='horizontal' justify='center' pad='medium' background="light-6">
                                         {this.state.selected + Cases}
                                     </CardFooter>
                                 </Card>
