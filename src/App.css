@@ -36,8 +36,17 @@
   margin-bottom: 2em;
 }
 
+.card{
+  height: auto !important;
+}
+
 .map{
   margin-top: 2em;
+}
+
+.stroke-3 {
+  stroke: green;
+  stroke-width: 5%;
 }
 
 .App-Header {
